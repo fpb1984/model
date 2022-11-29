@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<deployment-descriptor xsi:schemaLocation="http://www.jboss.org/jbpm deployment-descriptor.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <persistence-unit>org.jbpm.domain</persistence-unit>
+    <audit-persistence-unit>org.jbpm.domain</audit-persistence-unit>
+    <audit-mode>JPA</audit-mode>
+    <persistence-mode>JPA</persistence-mode>
+    <runtime-strategy>SINGLETON</runtime-strategy>
+    <marshalling-strategies/>
+    <event-listeners/>
+    <task-event-listeners/>
+    <globals/>
+    <work-item-handlers>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new org.jbpm.process.workitem.email.EmailWorkItemHandler("smtp.gmail.com", "587", "pocfiscalia@gmail.com", "redhat.01", "true")</identifier>
+            <parameters/>
+            <name>Email</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new org.jbpm.process.workitem.rest.RESTWorkItemHandler()</identifier>
+            <parameters/>
+            <name>Rest</name>
+        </work-item-handler>
+        <work-item-handler>
+            <resolver>mvel</resolver>
+            <identifier>new org.kie.server.client.integration.RemoteBusinessRuleTaskHandler("http://localhost:8080/kie-server/services/rest/server", "rhpamAdmin", "redhat.01", classLoader)</identifier>
+            <parameters/>
+            <name>RemoteBusinessRule</name>
+        </work-item-handler>
+    </work-item-handlers>
+    <environment-entries/>
+    <configurations/>
+    <required-roles/>
+    <remoteable-classes>
+        <remoteable-class>cl.fiscalia.rgp.causapenal.model.Delito</remoteable-class>
+        <remoteable-class>cl.fiscalia.rgp.causapenal.model.Causa</remoteable-class>
+        <remoteable-class>cl.fiscalia.rgp.causapenal.model.tipo.EstadoCausa</remoteable-class>
+        <remoteable-class>cl.fiscalia.rgp.causapenal.model.Denuncia</remoteable-class>
+        <remoteable-class>cl.fiscalia.rgp.causapenal.model.SujetoInterviniente</remoteable-class>
+        <remoteable-class>cl.fiscalia.rgp.causapenal.model.Documento</remoteable-class>
+        <remoteable-class>cl.fiscalia.rgp.causapenal.model.AplicacionPauta</remoteable-class>
+        <remoteable-class>cl.fiscalia.rgp.causapenal.model.EspecieDinero</remoteable-class>
+        <remoteable-class>cl.fiscalia.rgp.causapenal.model.MedidaProteccion</remoteable-class>
+    </remoteable-classes>
+    <limit-serialization-classes>true</limit-serialization-classes>
+</deployment-descriptor>
